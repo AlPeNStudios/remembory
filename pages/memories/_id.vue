@@ -61,7 +61,7 @@ export default {
             return _memory.id == this.$route.params.id
         })
 
-        this.memory = memory
+        this.memory = JSON.parse(JSON.stringify(memory))
     },
 
     methods: {
