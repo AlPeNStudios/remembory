@@ -1,0 +1,21 @@
+{
+  "name": "remembory",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AlPeNStudios/remembory.git",
+  "author": "Das PeTe <daspetemail@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "dotenv": "^8.2.0",
+    "node-sass": "^4.14.1",
+    "nuxt": "^2.12.2",
+    "sass-loader": "^8.0.2"
+  }
+}
