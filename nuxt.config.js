@@ -3,6 +3,10 @@ export default {
         { ssr: false, src: '~plugins/nuxtClientInit' }
     ],
 
+    css: [
+        '~/assets/scss/app.scss'
+    ],
+
     buildModules: [
         '@nuxtjs/pwa',
     ],

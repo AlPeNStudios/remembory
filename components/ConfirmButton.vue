@@ -1,5 +1,6 @@
 <template>
     <button 
+        type="button"
         class="confirmbutton"
         @click="ShowConfirmation"
     >
@@ -50,6 +51,9 @@ export default {
 
 <style lang="scss">
 .confirmbutton {
+    padding: 8px 13px !important;
+    font-size: 16px !important;
+
     &__message {
         padding: 10px 0 20px;
         font-size: 16px;
@@ -73,7 +77,6 @@ export default {
             margin-top: -100px;
             margin-left: -150px;
             width: 300px;
-            height: 130px;
             background-color: rgba(black, 0.5);
             background-color: white;
             z-index: 1;

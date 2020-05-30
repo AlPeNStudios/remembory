@@ -1,28 +1,19 @@
 <template>
-    <div class="memory__list">
-        <div 
-            class="memory__list__item"
-            v-for="(memory, memoryIndex) in $store.getters['memories/Memories']"
-            :key="`memory-${ memory.id }-${ memoryIndex }`"
-        >
-            <ConfirmButton 
-                @confirm="$store.commit('memories/removeMemory', memory.id)"
-                :confirmmessage="`Soll die Übung <b>${ memory.title }</b> wirklich gelöscht werden?`"
-            >löschen</ConfirmButton>
-            {{ memory.title }} 
-        </div>
-
-        
-        <button @click="AddMemory">Add memory</button>
+    <div class="app">
+        <client-only>
+            <MemoryList />
+        </client-only>
     </div>
 </template>
 
 <script>
 import ConfirmButton from '~/components/ConfirmButton'
+import MemoryList from '~/components/MemoryList'
 
 export default {
     components: {
-        ConfirmButton
+        ConfirmButton,
+        MemoryList
     },
 
     methods: {

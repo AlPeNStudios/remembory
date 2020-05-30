@@ -15,10 +15,16 @@ export const mutations = {
         localStorage.setItem('memories', JSON.stringify(state.memories))
     },
 
+    updateMemory(state, memory){
+        let currentMemory = state.memories.find((_memory) => { return _memory.id == memory.id })
+        currentMemory.rows = memory.rows
+        currentMemory.title = memory.title
+        currentMemory.columnCount = memory.columnCount
+        localStorage.setItem('memories', JSON.stringify(state.memories))
+    },
+
     removeMemory(state, memoryId){
-        state.memories = state.memories.filter((memory) => {
-            return memory.id != memoryId
-        })
+        state.memories = state.memories.filter((memory) => { return memory.id != memoryId })
         localStorage.setItem('memories', JSON.stringify(state.memories))
     }
 }
