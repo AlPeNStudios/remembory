@@ -6,32 +6,37 @@
         
         
         <div v-if="memory">
-            <div v-if="!gameStarted">
+            <div class="startmenu" v-if="!gameStarted">
                 <label>Wieviele Felder sollen verdeckt werden? </label><input v-model="holeCount" />
-                <button @click="StartGame">Start</button>
+                <br><br><button @click="StartGame">Start</button>
             </div>
             <div v-if="gameStarted" class="memory">
-                <div>
-                    Fülle alle grünen Felder aus
+                <div class="description">
+                    Fülle alle grauen Felder aus
                 </div>
 
-                <div class="memory__row" v-for="row in memory.rows" :key="`row-${ row.id }`">
-                    <div :class="GetColumnClasses(column)" v-for="column in row.columns" :key="`column-${ column.id }`">
-                        <div v-if="column.isHeader == false && column.isHidden == true">
-                            <textarea v-if="!gameFinished" v-model="column.userInput" />
-                            <div v-if="gameFinished">
-                                Deine Antwort: <b>{{ column.userInput }} </b>
-                                <div v-if="!ColumnIsCorrect(column)">Richtige Antwort: <b>{{ column.content }}</b></div>
+                <TableZoomer>
+                    <div>
+                        <div class="memory__row" v-for="row in memory.rows" :key="`row-${ row.id }`">
+                            <div :class="GetColumnClasses(column)" v-for="column in row.columns" :key="`column-${ column.id }`">
+                                <div v-if="column.isHeader == false && column.isHidden == true">
+                                    <textarea v-if="!gameFinished" v-model="column.userInput" />
+                                    <div v-if="gameFinished">
+                                        Deine Antwort: <b>{{ column.userInput }} </b>
+                                        <div v-if="!ColumnIsCorrect(column)">Richtige Antwort: <b>{{ column.content }}</b></div>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    {{ column.content }}
+                                </div>
                             </div>
                         </div>
-                        <div v-else>
-                            {{ column.content }}
-                        </div>
                     </div>
-                </div>
+                </TableZoomer>
 
-                <div>
-                    <button @click="FinishGame">Fertig</button>
+                <div class="bottommenu">
+                    <button v-if="!gameFinished" @click="FinishGame">Fertig</button>
+                    <button v-if="gameFinished" @click="RestartGame">Nochmal</button>
                 </div>
             </div>
 
@@ -41,7 +46,13 @@
 </template>
 
 <script>
+import TableZoomer from '~/components/TableZoomer'
+
 export default {
+    components: {
+        TableZoomer
+    },
+
     asyncData(){
         return {
             memory: null,
@@ -96,9 +107,18 @@ export default {
             this.gameFinished = true
         },
 
+        RestartGame(){
+            location.reload()
+        },
+
         ColumnIsCorrect(column){
-            console.log(column)
-            return column.userInput == column.content
+            let userInput = column.userInput
+            let content = column.content
+
+            userInput = userInput.trim().toLowerCase()
+            content = content.trim().toLowerCase()
+            
+            return userInput == content
         },
 
         GetColumnClasses(column){

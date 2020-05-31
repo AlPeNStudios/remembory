@@ -1,14 +1,18 @@
 <template>
     <div class="memoryform">
+    <client-only>
         <div class="topmenu">
             <nuxt-link to="/">Zurück zum Start</nuxt-link>
         </div>
+        
 
-        <form @submit.prevent="AddMemory">
-            <div class="memorysettings">
-                <label for="memorytitle">Titel des Remembories</label><input type="text" name="memorytitle" v-model="memory.title"  /><br>
-                <label for="memorycolumns">Spalten pro Zeile</label><input name="memorycolumns" type="number" v-model="memory.columnCount"  /><br>
-            </div>
+        <div class="memorysettings">
+            <label for="memorytitle">Titel des Remembories</label><input type="text" name="memorytitle" v-model="memory.title"  /><br>
+            <label for="memorycolumns">Spalten pro Zeile</label><input name="memorycolumns" type="number" v-model="memory.columnCount"  /><br>
+        </div>
+
+
+        <TableZoomer>
             <div class="memoryedit">
                 <div class="memoryedit__row" v-for="row in memory.rows" :key="`row-${ row.id }`">
                     <div class="memoryedit__column memoryedit__column--small">
@@ -27,24 +31,24 @@
                     </div>
                 </div>
             </div>
-
-            <div class="memoryaddrow">
-                <button type="button" @click="AddRow">Neue Zeile hinzufügen</button>
-            </div>
- 
-            <div class="memorysave">
-                <button type="submit">Speichern</button>
-            </div>
-        </form>
+        </TableZoomer>
+    
+        <div class="memorysave">
+            <button type="button" v-on:click="AddRow()">Neue Zeile hinzufügen</button>
+            <button type="button" v-on:click="AddMemory()">Speichern</button>
+        </div>
+        </client-only>
     </div>
 </template>
 
 <script>
-import ConfirmButton from '~/components/ConfirmButton'
+import ConfirmButton from '~/components/ConfirmButton' 
+import TableZoomer from '~/components/TableZoomer'
 
 export default {
     components: {
-        ConfirmButton
+        ConfirmButton,
+        TableZoomer
     },
 
     data(){

@@ -1,5 +1,8 @@
 <template>
     <div class="memory__list">
+        <div style="text-align: center">
+            <h1>Remembory</h1>
+        </div>
         <div 
             class="memory__list__item"
             v-for="(memory, memoryIndex) in $store.getters['memories/Memories']"
@@ -12,11 +15,14 @@
                 löschen
             </ConfirmButton>
             <nuxt-link :to="`/memories/edit/${ memory.id }`">bearbeiten</nuxt-link>
-            <nuxt-link :to="`/memories/${ memory.id }`">{{ memory.title }}</nuxt-link>
+            <nuxt-link :to="`/memories/${ memory.id }`"><b>{{ memory.title }}</b></nuxt-link>
         </div>
 
         <!-- <button @click="AddMemory">Add memory</button> -->
-        <nuxt-link to="/memories/create">Neues Remembory erstellen</nuxt-link>
+        <div class="bottommenu">
+            <nuxt-link to="/memories/create">Neues Remembory erstellen</nuxt-link>
+        </div>
+        
     </div>
 </template>
 
